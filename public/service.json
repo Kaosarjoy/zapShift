@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Pick & Drop Service",
+    "description": "Personal parcels and business items picked up and delivered safely on time."
+  },
+  {
+    "id": 2,
+    "title": "Same Day Delivery",
+    "description": "Urgent packages delivered within the same day across the city."
+  },
+  {
+    "id": 3,
+    "title": "Business Logistics",
+    "description": "Reliable logistics support for small and medium businesses."
+  },
+  {
+    "id": 4,
+    "title": "Real-Time Tracking",
+    "description": "Track your shipment live from pickup to final delivery."
+  },
+  {
+    "id": 5,
+    "title": "Secure Handling",
+    "description": "Every package is handled with care to ensure maximum safety."
+  },
+  {
+    "id": 6,
+    "title": "Scheduled Delivery",
+    "description": "Choose a delivery time that fits your schedule and convenience."
+  }
+]

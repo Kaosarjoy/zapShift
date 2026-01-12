@@ -1,35 +1,60 @@
 import React from 'react';
-import bannerImg from '../../assets/big.png'
-import smallBanner from '../../assets/small.png'
+import bannerImg1 from '../../assets/banner/banner1.png';
+import bannerImg2 from '../../assets/banner/banner2.png';
+import bannerImg3 from '../../assets/banner/banner3.png';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import { MdArrowOutward } from 'react-icons/md';
+
 const Banner = () => {
     return (
-        <div className='flex justify-center items-center gap-4'>
-            <div >
-                <img src={smallBanner} alt="" />
-                <div className='flex flex-col gap-4 mt-4'>
-                    <h2 className='text-2xl font-bold text-black'>We Make Sure Your   
-                        <span className='text-base-200 gap-1'>Parcel Arrives </span>
-                         On Time – No Fuss.</h2>
+        <Carousel
+  infiniteLoop
+  autoPlay
+  showThumbs={false}
+  showStatus={false}
+  showIndicators={true}
+>
+  <div className="relative bg-white">
+    {/* Image */}
+    <img src={bannerImg1} className="w-full h-[500px] object-cover" />
 
-                         <p>
-        Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle.
-         From personal packages to business shipments — we deliver on time, every time.
-                         </p>
+    {/* Text Overlay */}
+    <div className="absolute inset-0 flex items-center">
+      <div className="max-w-xl ml-20  space-y-5 text-left">
+        
+        <p className="text-gray-600">
+          Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle.
+          From personal packages to business shipments — we deliver on time, every time.
+        </p>
 
-                         <div className='flex justify-baseline items-center gap-2 '>
-                            <button className='btn btn-primary rounded-2xl p-2'>Track Your Parcel</button>
-                            <button className="btn bg-black text-white rounded-full w-10 h-10 p-0 flex items-center justify-center">
-                                <MdArrowOutward className="text-lg" />
-                              </button>
-                            <button className='btn bg-white p-2 rounded-xl'>Be A Rider</button>
-                         </div>
-                </div>
-            </div>
-            <div className='flex'>
-                <img src={bannerImg} alt="" />
-            </div>
+        <div className="flex items-center gap-3">
+          <button className="btn btn-primary rounded-full px-6">
+            Track Your Parcel
+          </button>
+
+          <button className="btn bg-black text-white rounded-full w-11 h-11 p-0 flex items-center justify-center">
+            <MdArrowOutward className="text-lg" />
+          </button>
+
+          <button className="btn btn-outline rounded-full px-6">
+            Be A Rider
+          </button>
         </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <img src={bannerImg2} />
+  </div>
+
+  <div>
+    <img src={bannerImg3} />
+  </div>
+</Carousel>
+
     );
 };
 
