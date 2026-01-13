@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "image": "https://i.ibb.co.com/TMhmLt6Q/customer-top.png",
+    "title": "Live Parcel Tracking",
+    "description": "Track your parcel in real time from pickup to final delivery with full transparency."
+  },
+  {
+    "id": 2,
+    "image": "https://i.ibb.co.com/zWGmQrrS/safe-delivery.png",
+    "title": "100% Safe Delivery",
+    "description": "Every package is handled with care to ensure secure and damage-free delivery."
+  },
+  {
+    "id": 3,
+    "image": "https://i.ibb.co.com/zWGmQrrS/safe-delivery.png",
+    "title": "24/7 Call Center Support",
+    "description": "Our dedicated support team is available 24/7 to assist you anytime you need help."
+  }
+]

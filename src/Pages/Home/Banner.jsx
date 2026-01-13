@@ -8,7 +8,7 @@ import { MdArrowOutward } from 'react-icons/md';
 
 const Banner = () => {
     return (
-        <Carousel
+<Carousel
   infiniteLoop
   autoPlay
   showThumbs={false}
@@ -17,43 +17,57 @@ const Banner = () => {
 >
   <div className="relative bg-white">
     {/* Image */}
-    <img src={bannerImg1} className="w-full h-[500px] object-cover" />
+    <img
+      src={bannerImg1}
+      className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+    />
 
-    {/* Text Overlay */}
+    {/* Overlay */}
     <div className="absolute inset-0 flex items-center">
-      <div className="max-w-xl ml-20  space-y-5 text-left">
-        
-        <p className="text-gray-600">
+      <div className="
+        max-w-xl
+        px-6 sm:px-10 lg:ml-20
+        space-y-4
+        text-left
+      ">
+        <p className="text-gray-700 text-sm sm:text-base">
           Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle.
           From personal packages to business shipments — we deliver on time, every time.
         </p>
 
-        <div className="flex items-center gap-3">
-          <button className="btn btn-primary rounded-full px-6">
+        {/* Buttons */}
+        <div className="flex flex-wrap items-center gap-3">
+          <button className="btn btn-primary rounded-full px-5 text-sm sm:text-base">
             Track Your Parcel
           </button>
 
-          <button className="btn bg-black text-white rounded-full w-11 h-11 p-0 flex items-center justify-center">
+          <button className="btn bg-black text-white rounded-full w-10 h-10 p-0 flex items-center justify-center">
             <MdArrowOutward className="text-lg" />
           </button>
 
-          <button className="btn btn-outline rounded-full px-6">
+          <button className="btn btn-outline rounded-full px-5 text-sm sm:text-base">
             Be A Rider
           </button>
         </div>
-
       </div>
     </div>
   </div>
 
   <div>
-    <img src={bannerImg2} />
+    <img
+      src={bannerImg2}
+      className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+    />
   </div>
 
   <div>
-    <img src={bannerImg3} />
+    <img
+      src={bannerImg3}
+      className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+    />
   </div>
 </Carousel>
+
 
     );
 };

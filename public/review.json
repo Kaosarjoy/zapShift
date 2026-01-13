@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "quote": "A posture corrector works by providing support and gentle alignment to your shoulders, back, and spine.",
+    "name": "Awlad Hossin",
+    "designation": "Senior Product Designer",
+    "avatarColor": "teal"
+  },
+  {
+    "id": 2,
+    "quote": "Good posture improves confidence and reduces long-term back pain when practiced daily.",
+    "name": "Nusrat Jahan",
+    "designation": "UX Researcher",
+    "avatarColor": "blue"
+  },
+  {
+    "id": 3,
+    "quote": "Small daily habits like sitting straight can prevent serious spinal issues later in life.",
+    "name": "Rakib Hasan",
+    "designation": "Fitness Consultant",
+    "avatarColor": "green"
+  },
+  {
+    "id": 4,
+    "quote": "Posture awareness is the foundation of a healthy and active lifestyle.",
+    "name": "Tahmina Akter",
+    "designation": "Physiotherapist",
+    "avatarColor": "purple"
+  },
+  {
+    "id": 5,
+    "quote": "Maintaining correct posture boosts productivity and keeps your body relaxed.",
+    "name": "Mehedi Islam",
+    "designation": "Product Manager",
+    "avatarColor": "orange"
+  },
+  {
+    "id": 6,
+    "quote": "Your spine remembers bad posture, so train it right from the start.",
+    "name": "Sadia Rahman",
+    "designation": "Health Coach",
+    "avatarColor": "red"
+  },
+  {
+    "id": 7,
+    "quote": "Simple stretches every morning can realign your posture naturally.",
+    "name": "Tanvir Islam",
+    "designation": "Yoga Instructor",
+    "avatarColor": "cyan"
+  },
+  {
+    "id": 8,
+    "quote": "Sitting upright while working keeps your energy levels high throughout the day.",
+    "name": "Farhana Akter",
+    "designation": "Office Manager",
+    "avatarColor": "pink"
+  },
+  {
+    "id": 9,
+    "quote": "Proper posture supports better breathing and reduces fatigue.",
+    "name": "Shahriar Karim",
+    "designation": "Physiotherapist",
+    "avatarColor": "lime"
+  },
+  {
+    "id": 10,
+    "quote": "Awareness of posture habits is key to long-term spinal health.",
+    "name": "Nabila Rahman",
+    "designation": "Health Coach",
+    "avatarColor": "amber"
+  }
+]
