@@ -3,6 +3,10 @@ import RootLayout from "../Layout/RootLayout";
 import Home from "../Pages/Home/Home";
 import Coverage from "../Pages/Coverage/Coverage";
 import Services from "../Pages/Home/Services";
+import AboutUs from "../Pages/About/AboutUs";
+import AuthLayout from "../Layout/AuthLayout";
+import Login from "../Pages/Auth/Login/Login";
+import Register from "../Pages/Auth/Register/Register";
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +25,25 @@ export const router = createBrowserRouter([
     {
       path:"/services",
       Component:Services
+    },
+    {
+      path:"/aboutUs",
+      Component:AboutUs
     }
     
    ]
   },
+  {
+    path:'/',
+    Component:AuthLayout,
+    children:[
+      {
+        path:'/login',
+        Component:Login
+      },{
+        path:'/register',
+        Component:Register
+      }
+    ]
+  }
 ]);

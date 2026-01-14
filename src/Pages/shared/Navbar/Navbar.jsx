@@ -48,11 +48,11 @@ const Navbar = () => {
       <div className="navbar-end gap-2">
         <div className="navbar-end flex items-center gap-2">
   <button className="btn btn-outline rounded-2xl">
-    Sign In
+   LogIn
   </button>
 
   <button className="btn bg-primary text-black rounded-2xl">
-    Sign Up
+  Register
   </button>
 
   <button className="btn bg-black text-white rounded-full w-10 h-10 p-0 flex items-center justify-center">

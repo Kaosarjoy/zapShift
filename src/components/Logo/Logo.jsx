@@ -1,8 +1,10 @@
 import React from 'react';
 import logoImg from '../../assets/logo.png'
+import { NavLink } from 'react-router';
 const Logo = () => {
     return (
-       <div className="flex items-end">
+ <NavLink to='/'>
+        <div className="flex items-end">
   {/* Logo Image */}
   <img 
     src={logoImg} 
@@ -15,6 +17,7 @@ const Logo = () => {
     ZapShift
   </h1>
 </div>
+ </NavLink>
 
     );
 };

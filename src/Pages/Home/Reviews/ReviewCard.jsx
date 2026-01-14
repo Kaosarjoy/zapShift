@@ -23,7 +23,7 @@ const ReviewCard = ({ review }) => {
       {/* Reviewer info */}
       <div className="flex items-center gap-4">
         <div
-          className="w-14 h-14 rounded-full flex-shrink-0"
+          className="w-14 h-14 rounded-full "
           style={{ backgroundColor: avatarColor }}
         />
         <div>
