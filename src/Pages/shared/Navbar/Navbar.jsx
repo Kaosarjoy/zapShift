@@ -47,13 +47,17 @@ const Navbar = () => {
 
       <div className="navbar-end gap-2">
         <div className="navbar-end flex items-center gap-2">
-  <button className="btn btn-outline rounded-2xl">
-   LogIn
-  </button>
+  <NavLink to="/login">
+    <button className="btn btn-outline rounded-2xl">
+      Login
+    </button>
+  </NavLink>
 
-  <button className="btn bg-primary text-black rounded-2xl">
-  Register
+ <NavLink to="/register">
+  <button className="btn btn-outline rounded-2xl">
+   Register
   </button>
+ </NavLink>
 
   <button className="btn bg-black text-white rounded-full w-10 h-10 p-0 flex items-center justify-center">
     <MdArrowOutward className="text-lg" />
