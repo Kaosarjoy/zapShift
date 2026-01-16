@@ -7,7 +7,7 @@ const AuthLayout = () => {
         <div>
         <Logo></Logo>
            <div>
-            <div className='flex items-center'>
+            <div className='flex items-center border-accent mt-4 mx-4 md:mx-20 rounded-xl shadow-lg overflow-hidden bg-accent'>
                 <div className='flex-1'>
                 <Outlet></Outlet>
             </div>

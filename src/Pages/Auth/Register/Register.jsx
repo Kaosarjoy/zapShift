@@ -2,9 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
+import axios from 'axios';
+
 
 const Register = () => {
-  const { registerUser, googleSignIn } = useAuth();
+        
+  const { registerUser, googleSignIn,updateUserProfile} = useAuth();
 
   const {
     register,
@@ -12,27 +15,52 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegister = (data) => {
-    registerUser(data.email, data.password)
-      .then((result) => console.log(result.user))
-      .catch((error) => console.log(error.message));
-  };
+const handleRegister = (data) => {
+  const profileImage = data.photo[0];
 
-  const handleGoogleSignIn = () => {
+  registerUser(data.email, data.password)
+    .then(() => {
+      const formData = new FormData();
+      formData.append('image', profileImage);
+
+      const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_API}`;
+
+      axios.post(image_API_URL, formData)
+        .then((res) => {
+          const photoURL = res.data.data.display_url;
+          console.log(res.data.data.display_url); 
+          
+
+          const profile = {
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+
+          updateUserProfile(profile)
+            .then(() => {
+              console.log('profile updated with image');
+            });
+        });
+    })
+    .catch((error) => console.log(error.message));
+};
+
+const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => console.log(result.user))
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 md:px-8">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 md:px-8 mx-auto">
   <form
     onSubmit={handleSubmit(handleRegister)}
     className="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md space-y-4"
   >
-    <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
-      Create an Account
+    <h2 className="text-3xl font-bold text-center text-gray-700 mb-4">
+     Create an Account
     </h2>
+    <p className='text-gray-400 font-semibold'>Register with ZapShift</p>
 
     {/* Name */}
     <div className="flex flex-col">
@@ -64,17 +92,22 @@ const Register = () => {
 
     {/* Photo URL */}
     <div className="flex flex-col">
-      <label className="mb-1 text-gray-600 font-medium">Photo URL</label>
-      <input
-        type="text"
-        {...register('photo', { required: true })}
-        className="input input-bordered w-full px-4 py-3 rounded-xl border-gray-300 focus:ring-2 focus:ring-secondary focus:outline-none"
-        placeholder="Photo URL"
-      />
-      {errors.photo && (
-        <span className="text-red-600 text-sm mt-1">Photo URL is required</span>
-      )}
-    </div>
+  <label className="mb-1 text-gray-600 font-medium">
+    Photo
+  </label>
+
+  <input
+    type="file"
+    {...register('photo', { required: true })}
+    className="file-input file-input-primary w-full"
+  />
+
+  {errors.photo && (
+    <span className="text-red-600 text-sm mt-1">
+      Photo is required
+    </span>
+  )}
+</div>
 
     {/* Password */}
     <div className="flex flex-col">
@@ -134,7 +167,7 @@ const Register = () => {
         <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73" />
         <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55" />
       </svg>
-      <span>Sign up with Google</span>
+      <span>Register with google</span>
     </button>
 
     {/* Login Link */}

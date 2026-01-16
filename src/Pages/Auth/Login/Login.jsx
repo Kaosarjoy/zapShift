@@ -25,14 +25,15 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 md:px-8 mt-5">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 md:px-8 mt-5 mx-auto">
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md space-y-4"
       >
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">
-          Login to Your Account
+        <h2 className="text-3xl font-bold text-center text-gray-700 mb-4">
+         Welcome Back
         </h2>
+        <p className='font-semibold text-gray-400 '>Login with ZapShift</p>
 
         {/* Email */}
         <div className="flex flex-col">

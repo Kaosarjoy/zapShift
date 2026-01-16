@@ -2,23 +2,32 @@ import React from 'react';
 import Logo from '../../../components/Logo/Logo';
 import { NavLink } from 'react-router';
 import { MdArrowOutward } from 'react-icons/md';
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
+  const { user, signOutUser } = useAuth();
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => console.log('SignOut Successful'))
+      .catch(error => console.log(error.message));
+  };
 
   const links = (
     <>
-      <NavLink  to="/services">Services</NavLink>
+      <NavLink to="/services">Services</NavLink>
       <NavLink to="/aboutUs">About Us</NavLink>
       <NavLink to="/pricing">Pricing</NavLink>
       <NavLink to="/blog">Blog</NavLink>
       <NavLink to="/contact">Contact</NavLink>
       <NavLink to="/coverage">Coverage</NavLink>
-
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm rounded-2xl mb-4">
+    <div className="navbar bg-base-100 shadow-sm rounded-2xl px-4 mb-4">
+
+      {/* START */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,7 +40,7 @@ const Navbar = () => {
 
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 gap-2 rounded-box z-10 mt-3 w-52 p-2 shadow">
+            className="menu menu-sm dropdown-content bg-base-100 gap-2 rounded-box z-10 mt-3 w-52 p-3 shadow">
             {links}
           </ul>
         </div>
@@ -39,30 +48,46 @@ const Navbar = () => {
         <Logo />
       </div>
 
+      {/* CENTER */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">
+        <ul className="menu menu-horizontal gap-3">
           {links}
         </ul>
       </div>
 
-      <div className="navbar-end gap-2">
-        <div className="navbar-end flex items-center gap-2">
-  <NavLink to="/login">
-    <button className="btn btn-outline rounded-2xl">
-      Login
-    </button>
-  </NavLink>
+      {/* END */}
+      <div className="navbar-end">
 
- <NavLink to="/register">
-  <button className="btn btn-outline rounded-2xl">
-   Register
-  </button>
- </NavLink>
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="btn btn-primary px-4"
+          >
+            LogOut
+          </button>
+        ) : (
+          <>
+            {/* Mobile → only Login */}
+            <NavLink to="/login" className="lg:hidden">
+              <button className="btn btn-primary px-4">
+                Login
+              </button>
+            </NavLink>
 
-  <button className="btn bg-black text-white rounded-full w-10 h-10 p-0 flex items-center justify-center">
-    <MdArrowOutward className="text-lg" />
-  </button>
-</div>
+            {/* Desktop */}
+            <div className="hidden lg:flex items-center gap-2">
+              <NavLink to="/login">
+                <button className="btn btn-primary">
+                  Login
+                </button>
+              </NavLink>
+            </div>
+          </>
+        )}
+
+        <NavLink to='/beRider' className='ml-4'>
+          <button className='btn btn-primary text-black'>Be a Rider</button>
+        </NavLink>
 
       </div>
     </div>
