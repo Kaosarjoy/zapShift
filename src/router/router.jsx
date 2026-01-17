@@ -7,6 +7,10 @@ import AboutUs from "../Pages/About/AboutUs";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
+import ForgetPassword from "../Pages/ForgetPassword";
+import PrivateRouter from "../router/PrivateRouter";
+import Rider from "../Pages/Rider/Rider";
+import SendParcel from "../Pages/SendParcel/SendParcel";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +31,20 @@ export const router = createBrowserRouter([
       Component:Services
     },
     {
+      path:"/sendParcel",
+      element:<PrivateRouter>
+        <SendParcel></SendParcel>
+      </PrivateRouter>,
+       loader:()=>fetch('/map.json').then(res=>res.json())
+   
+    },
+    {
+      path:'/beRider',
+      element:<PrivateRouter>
+        <Rider></Rider>
+      </PrivateRouter>
+    },
+    {
       path:"/aboutUs",
       Component:AboutUs
     }
@@ -43,6 +61,10 @@ export const router = createBrowserRouter([
       },{
         path:'/register',
         Component:Register
+      },
+      {
+        path:'/forget-password',
+        Component:ForgetPassword
       }
     ]
   }

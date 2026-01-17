@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContexts } from './AuthContexts';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../components/Firebase/Firebase.init';
+import { sendPasswordResetEmail } from 'firebase/auth/cordova';
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -32,6 +33,11 @@ const AuthProvider = ( {children}) => {
         setLoading(true);
       return  signOut(auth)
     }
+    //Forget Password
+    const forgetPassword=(email)=>{
+      setLoading(true);
+      return sendPasswordResetEmail(auth,email);
+    }
     //profile update
     const updateUserProfile=(profile)=>{
       return updateProfile(auth.currentUser,profile);
@@ -53,6 +59,7 @@ const AuthProvider = ( {children}) => {
         LoginUser,
         googleSignIn,
         signOutUser,
+        forgetPassword,
         updateUserProfile
     }
     return (

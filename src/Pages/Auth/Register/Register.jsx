@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 
@@ -8,7 +8,8 @@ import axios from 'axios';
 const Register = () => {
         
   const { registerUser, googleSignIn,updateUserProfile} = useAuth();
-
+  const location=useLocation();
+  const navigate =useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,6 +21,7 @@ const handleRegister = (data) => {
 
   registerUser(data.email, data.password)
     .then(() => {
+     
       const formData = new FormData();
       formData.append('image', profileImage);
 
@@ -41,13 +43,17 @@ const handleRegister = (data) => {
               console.log('profile updated with image');
             });
         });
+         navigate(location?.state || '/');
     })
     .catch((error) => console.log(error.message));
 };
 
 const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        navigate(location?.state || '/');
+        console.log(result.user)
+      })
       .catch((error) => console.log(error.message));
   };
 
@@ -173,7 +179,9 @@ const handleGoogleSignIn = () => {
     {/* Login Link */}
     <p className="text-center text-gray-500 mt-2">
       Already have an account?{' '}
-      <NavLink to="/login" className="text-secondary font-medium hover:underline">
+      <NavLink to="/login" 
+      state={location.state}
+      className="text-secondary font-medium hover:underline">
         Login Now
       </NavLink>
     </p>

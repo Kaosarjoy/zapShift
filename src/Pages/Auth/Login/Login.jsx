@@ -1,11 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
   const { LoginUser, googleSignIn } = useAuth();
-
+  const location=useLocation();
+  const navigate =useNavigate();
+  console.log('pathname',location);
   const {
     register,
     handleSubmit,
@@ -14,13 +16,21 @@ const Login = () => {
 
   const handleLogin = (data) => {
     LoginUser(data.email, data.password)
-      .then((result) => console.log(result.user))
-      .catch((error) => console.log(error.message));
+      .then((result) => {
+        console.log(result.user)
+        navigate(location?.state || '/');
+      })
+      .catch((error) => {
+        console.log(error.message)
+      });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        console.log(result.user)
+        navigate(location?.state || '/');
+      })
       .catch((error) => console.log(error.message));
   };
 
@@ -65,7 +75,9 @@ const Login = () => {
 
         {/* Forgot Password */}
         <div className="text-right">
-          <a className="link link-hover text-sm text-gray-500">Forgot password?</a>
+          <Link to="/forget-password" className="text-sm text-secondary hover:underline">
+            Forgot Password?
+          </Link>
         </div>
 
         {/* Login Button */}
@@ -104,7 +116,9 @@ const Login = () => {
         {/* Register Link */}
         <p className="text-center text-gray-500 mt-2">
           Don't have an account?{' '}
-          <NavLink to="/register" className="text-secondary font-medium hover:underline">
+          <NavLink to="/register" 
+          state={location.state}
+          className="text-secondary font-medium hover:underline">
             Register Now
           </NavLink>
         </p>
