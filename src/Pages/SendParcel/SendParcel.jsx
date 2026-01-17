@@ -1,27 +1,78 @@
 import React from 'react';
-import { useForm} from 'react-hook-form';
+import { useForm, useWatch} from 'react-hook-form';
 import { useLoaderData } from 'react-router';
+import Swal from 'sweetalert2';
 
 const SendParcel = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
     const serviceCenter=useLoaderData();
    // console.log(serviceCenter)
+
+
     //region section
    const regions = [...new Set(serviceCenter.map(c => c.region))];
-    console.log(regions)
-    const senderRegion = watch('senderRegion');
+  //  console.log(regions)
+    const senderRegion = useWatch({control, name:'senderRegion'})
+    const receiverRegion = useWatch({ control, name: 'receiverRegion' })
+
+
     //distric section 
-const districtByRegion = (region) => {
-  if (!region) return [];
-  return serviceCenter
-    .filter(c => c.region === region)
-    .map(c => c.district);
-};
+        const districtByRegion = (region) => {
+        if (!region) return [];
+        return serviceCenter
+            .filter(c => c.region === region)
+            .map(c => c.district);
+        };
 
   
     const handleSendParcel = (data) => {
-        console.log('Parcel Data:', data);
-        alert('Parcel submitted successfully! Check console for data.');
+       console.log('Parcel Data:', data);
+     //   alert('Parcel submitted successfully! Check console for data.');
+
+        const isDocument = data.parcelType === 'Document';
+        const isSameDistric=data.senderDistrict===data.reciverDistrict;
+        const parcelWeight = parseFloat(data.parcelWeight);
+
+        let cost=0;
+
+
+        if(isDocument){
+          cost=  isSameDistric?60:80
+        }
+
+        else{
+            if(parcelWeight < 3){
+                cost = isSameDistric ?110:150
+            }
+            else{
+                const mincharge=isSameDistric ?110:150
+               const extraWeight = parcelWeight - 3;
+                const extraCharge = isSameDistric ? extraWeight * 40  : extraWeight * 40 + 40;
+                cost = mincharge + extraCharge
+            }
+        }
+      //  console.log('total cost ', cost)
+
+
+        //sweetAlert2
+
+        Swal.fire({
+  title: "Agree With the cost?",
+  text: `You will be charge!${cost}`,
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#CAEB66",
+  cancelButtonColor: "#03373D",
+  confirmButtonText: "i agree"
+}).then((result) => {
+  if (result.isConfirmed) {
+    // Swal.fire({
+    //   title: "Success your confirmation",
+    //   text: "thanks for conform it ",
+    //   icon: "success"
+    // });
+  }
+});
     };
 
     return (
@@ -193,18 +244,48 @@ const districtByRegion = (region) => {
                                 />
                                 {errors.receiverPhoneNo && <p className="text-red-500 text-sm">{errors.receiverPhoneNo.message}</p>}
                             </div>
+                            {/* reciver Region*/}
+                             <div className="space-y-1">
+                        <label className="text-xs font-semibold text-gray-600">
+                            Select Reciver region
+                        </label>
+
+                        <select
+                            {...register('receiverRegion', { required: 'Region লাগবেই' })}
+                            className="select select-ghost w-full p-2 border border-gray-200 rounded-md bg-white"
+                        >
+                            <option value="">region</option>
+
+                            {
+                            regions.map((r, i) => (
+                                <option key={i} value={r}>{r}</option>
+                            ))
+                            }
+                        </select>
+
+                            {errors.receiverRegion && (
+                            <p className="text-red-500 text-sm">{errors.receiverRegion.message}</p>
+                            )}
+
+                            </div>
+                            {/* reciver Distric*/}
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold text-gray-600">Receiver District</label>
-                                <select
-                                    {...register('receiverDistrict', { required: 'Select a district' })}
-                                    className="w-full p-2 border border-gray-200 rounded-md text-gray-400 bg-white"
-                                >
-                                    <option value="">Select your District</option>
-                                    <option value="Dhaka">Dhaka</option>
-                                    <option value="Chattogram">Chattogram</option>
-                                    <option value="Khulna">Khulna</option>
-                                </select>
-                                {errors.receiverDistrict && <p className="text-red-500 text-sm">{errors.receiverDistrict.message}</p>}
+                                <label className="text-xs font-semibold text-secondary">Reciver District</label>
+                               <select
+                                 {...register('reciverDistrict', { required: 'Select a district' })}
+                                    className="select  w-full p-2 border  rounded-md  bg-white"
+                                    >
+                                    <option value="" className='text-secondary'>Select Reciver District</option>
+                                    {
+                                       districtByRegion(receiverRegion).map((d, i) => (
+                                        <option key={i} value={d}>{d}</option>
+                                        ))
+                                    }
+                                    </select>
+
+                              {errors.reciverDistrict && (
+                 <p className="text-red-500 text-sm">{errors.reciverDistrict.message}</p>
+                          )}
                             </div>
                             <div className="space-y-1">
                                 <label className="text-xs font-semibold text-gray-600">Delivery Instruction</label>
