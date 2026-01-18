@@ -21,8 +21,16 @@ const Navbar = () => {
       <NavLink to="/blog">Blog</NavLink>
       <NavLink to="/contact">Contact</NavLink>
       <NavLink to="/coverage">Coverage</NavLink>
+
+       {
+      user && <>
+      <NavLink to="/dashboard/my-parcels">My Parcels</NavLink>
+      </>
+    }
     </>
+   
   );
+  
 
   return (
     <div className="navbar bg-base-100 shadow-sm rounded-2xl px-4 mb-4">

@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@react-icons/all-files": "^4.1.0",
+    "@tanstack/react-query": "^5.90.18",
     "axios": "^1.13.2",
     "firebase": "^12.8.0",
     "keen-slider": "^6.8.6",
@@ -22,6 +24,7 @@
     "react-icons": "^5.5.0",
     "react-leaflet": "^5.0.0-rc.2",
     "react-responsive-carousel": "^3.2.23",
+    "stripe": "^20.2.0",
     "sweetalert2": "^11.26.17",
     "swiper": "^12.0.3"
   },

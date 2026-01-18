@@ -2,9 +2,13 @@ import React from 'react';
 import { useForm, useWatch} from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import useAxios from '../../hooks/useAxios';
+import useAuth from '../../hooks/useAuth';
 
 const SendParcel = () => {
     const { register, handleSubmit, control, formState: { errors } } = useForm();
+    const{user}=useAuth()
+    const axiosSecure = useAxios();
     const serviceCenter=useLoaderData();
    // console.log(serviceCenter)
 
@@ -50,9 +54,10 @@ const SendParcel = () => {
                 const extraCharge = isSameDistric ? extraWeight * 40  : extraWeight * 40 + 40;
                 cost = mincharge + extraCharge
             }
+            
         }
       //  console.log('total cost ', cost)
-
+        data.cost=cost ; 
 
         //sweetAlert2
 
@@ -66,6 +71,13 @@ const SendParcel = () => {
   confirmButtonText: "i agree"
 }).then((result) => {
   if (result.isConfirmed) {
+    //Save the info for the database 
+
+    axiosSecure.post('/parcels',data)
+    .then((res)=>{
+        console.log("after save the data",res.data)
+    })
+
     // Swal.fire({
     //   title: "Success your confirmation",
     //   text: "thanks for conform it ",
@@ -131,10 +143,24 @@ const SendParcel = () => {
                                     type="text"
                                     {...register('senderName', { required: 'Sender Name is required' })}
                                     placeholder="Sender Name"
+                                    defaultValue={user?.displayName}
                                     className="w-full p-2 border border-gray-200 rounded-md placeholder:text-gray-300"
                                 />
                                 {errors.senderName && <p className="text-red-500 text-sm">{errors.senderName.message}</p>}
                             </div>
+
+                                    <div className="space-y-1">
+                                <label className="text-xs font-semibold text-gray-600">Sender Email</label>
+                                <input
+                                    type="text"
+                                    {...register('senderEmail', { required: 'Sender Email is required' })}
+                                    placeholder="senderEmail"
+                                    defaultValue={user?.email}
+                                    className="w-full p-2 border border-gray-200 rounded-md placeholder:text-gray-300"
+                                />
+                                {errors.senderEmail && <p className="text-red-500 text-sm">{errors.senderEmail.message}</p>}
+                            </div>
+
                             <div className="space-y-1">
                                 <label className="text-xs font-semibold text-gray-600">Address</label>
                                 <input
