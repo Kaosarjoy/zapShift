@@ -50,6 +50,12 @@ const PaymentSuccess = () => {
                                     <th className="py-3 text-gray-500 font-medium">Transaction ID</th>
                                     <td className="py-3 font-mono text-sm text-blue-600 font-bold">{paymentData?.transactionId}</td>
                                 </tr>
+
+                                <tr className="border-b">
+                                    <th className="py-3 text-gray-500 font-medium">Tracking ID</th>
+                                    <td className="py-3 font-mono text-sm text-blue-600 font-bold">{paymentData?.trackingId}</td>
+                                </tr>
+
                                 <tr className="border-b">
                                     <th className="py-3 text-gray-500 font-medium">Customer Email</th>
                                     <td className="py-3 text-gray-800">{paymentData?.paymentDetails?.customerEmail}</td>
