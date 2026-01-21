@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBox } from "react-icons/fa";
+import { FaBox, FaCreditCard } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashBoardLayout = () => {
@@ -78,6 +78,18 @@ const DashBoardLayout = () => {
               </NavLink>
             </li>
 
+
+          {/* Payment History */}
+            <li>
+              <NavLink
+                to="/dashboard/payment-history"
+                className="flex items-center gap-3"
+              >
+                <FaCreditCard className="text-lg"  /> 
+                <span>PaymentHistory</span>
+              </NavLink>
+            </li>
+
             {/* Settings */}
             <li>
               <button className="flex items-center gap-3">
@@ -104,7 +116,6 @@ const DashBoardLayout = () => {
                 <span>Settings</span>
               </button>
             </li>
-
           </ul>
         </aside>
       </div>
