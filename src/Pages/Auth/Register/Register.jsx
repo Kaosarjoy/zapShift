@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
+import useAxios from '../../../hooks/useAxios';
 
 
 const Register = () => {
@@ -10,6 +11,7 @@ const Register = () => {
   const { registerUser, googleSignIn,updateUserProfile} = useAuth();
   const location=useLocation();
   const navigate =useNavigate();
+  const axiosSecure = useAxios();
   const {
     register,
     handleSubmit,
@@ -30,9 +32,20 @@ const handleRegister = (data) => {
       axios.post(image_API_URL, formData)
         .then((res) => {
           const photoURL = res.data.data.display_url;
-          console.log(res.data.data.display_url); 
+         // console.log(res.data.data.display_url); 
           
-
+         //Create User in the Database 
+          const userInfo = {
+            email : data.email,
+            displayName : data.name,
+            photoURL: photoURL,
+          }
+          axiosSecure.post('/users',userInfo)
+          .then((res)=>{
+            if(res.data.insertedId){
+              console.log("users was created")
+            }
+          })
           const profile = {
             displayName: data.name,
             photoURL: photoURL,
@@ -40,7 +53,7 @@ const handleRegister = (data) => {
 
           updateUserProfile(profile)
             .then(() => {
-              console.log('profile updated with image');
+             // console.log('profile updated with image');
             });
         });
          navigate(location?.state || '/');
@@ -50,9 +63,9 @@ const handleRegister = (data) => {
 
 const handleGoogleSignIn = () => {
     googleSignIn()
-      .then((result) => {
+      .then(() => {
         navigate(location?.state || '/');
-        console.log(result.user)
+       //console.log(result.user)
       })
       .catch((error) => console.log(error.message));
   };

@@ -3,6 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import useAxios from '../../../hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { FaBangladeshiTakaSign } from 'react-icons/fa6';
+import dayjs from 'dayjs';
 
 const PaymentHistory = () => {
     const {user} =useAuth()
@@ -35,6 +36,7 @@ const PaymentHistory = () => {
           <th>Customer Email</th>
           <th>Transaction ID</th>
           <th>Amount</th>
+          <th>Date</th>
           <th>Tracking ID</th>
         </tr>
       </thead>
@@ -50,6 +52,11 @@ const PaymentHistory = () => {
             <td className="font-semibold text-black">
               {p.amount} TK
             </td>
+            <td className="text-gray-700">
+                {p.paidAt
+                  ? dayjs(p.paidAt).format("YYYY-MM-DD HH:mm:ss")
+                  : "N/A"}
+              </td>
             <td className="text-xs text-black break-all">
               {p.trackingId}
             </td>

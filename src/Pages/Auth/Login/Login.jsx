@@ -2,11 +2,13 @@ import React from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import useAxios from '../../../hooks/useAxios';
 
 const Login = () => {
   const { LoginUser, googleSignIn } = useAuth();
   const location=useLocation();
   const navigate =useNavigate();
+  const axiosSecure = useAxios();
   console.log('pathname',location);
   const {
     register,
@@ -17,22 +19,35 @@ const Login = () => {
   const handleLogin = (data) => {
     LoginUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user)
-        navigate(location?.state || '/');
+       console.log(result.user)
+        
       })
       .catch((error) => {
         console.log(error.message)
       });
   };
 
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result.user)
-        navigate(location?.state || '/');
-      })
-      .catch((error) => console.log(error.message));
-  };
+ const handleGoogleSignIn = () => {
+  googleSignIn()
+    .then((result) => {
+      const userInfo = {
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+      };
+
+      axiosSecure.post('/users', userInfo)
+        .then((res) => {
+          // ইউজার নতুন তৈরি হোক (insertedId) অথবা আগে থেকেই থাকুক (message)
+          // দুই ক্ষেত্রেই আমরা তাকে নেভিগেট করাবো
+          if (res.data.insertedId || res.data.message === "user exits") {
+           // console.log("Login Successful");
+            navigate(location?.state || '/');
+          }
+        });
+    })
+    .catch((error) => console.log(error.message));
+};
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 md:px-8 mt-5 mx-auto">

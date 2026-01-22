@@ -1,5 +1,6 @@
 import React from "react";
-import { FaBox, FaCreditCard } from "react-icons/fa";
+import { FaBox, FaCreditCard, FaUserTie } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashBoardLayout = () => {
@@ -89,7 +90,26 @@ const DashBoardLayout = () => {
                 <span>PaymentHistory</span>
               </NavLink>
             </li>
-
+            {/* Admin approve rider  */}
+            <li>
+              <NavLink
+                to="/dashboard/approve-rider"
+                className="flex items-center gap-3"
+              >
+              <GrUserAdmin className="text-lg" /> 
+                <span>Approve rider</span>
+              </NavLink>
+            </li>
+            {/* Admin approve User  */}
+            <li>
+              <NavLink
+                to="/dashboard/users-managment"
+                className="flex items-center gap-3"
+              >
+              <FaUserTie className="text-lg" />
+                <span> User Managment</span>
+              </NavLink>
+            </li>
             {/* Settings */}
             <li>
               <button className="flex items-center gap-3">
